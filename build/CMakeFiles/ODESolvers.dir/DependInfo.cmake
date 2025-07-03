@@ -8,15 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/praneethl/Documents/Code/Summer25/differential_solvers/main.cpp" "CMakeFiles/ODESolvers.dir/main.cpp.o" "gcc" "CMakeFiles/ODESolvers.dir/main.cpp.o.d"
+  "/home/praneeth/summer25/data_visualiser/main.cpp" "CMakeFiles/ODESolvers.dir/main.cpp.o" "gcc" "CMakeFiles/ODESolvers.dir/main.cpp.o.d"
   )
 
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
-  )
-
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ODESolvers.dir/main.cpp.o"
   "CMakeFiles/ODESolvers.dir/main.cpp.o.d"
-  "ODESolvers.cpython-313-darwin.so"
+  "ODESolvers.cpython-310-x86_64-linux-gnu.so"
   "ODESolvers.pdb"
 )
 
