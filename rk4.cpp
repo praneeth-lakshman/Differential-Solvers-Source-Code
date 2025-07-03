@@ -3,7 +3,7 @@
 #include <iostream>
 
 // dy/dt = log(abs(y)) - cos(t)
-double dydt(double y, double t) { return std::log(std::abs(y)) - std::cos(t); }
+double dydt(double y, double t) { return std::pow(y-1, 2) * std::pow(t-1, 2);}
 
 double next_step(double y, double h, double t) {
   double k_1 = h * dydt(y, t);
@@ -19,9 +19,9 @@ int main() {
   data.open("example1.txt");
   std::cout << "Hello" << std::endl;
   // initial values
-  double y = 1;
+  double y = 0;
   double h = 0.01;
-  for (double t = 0; t <= 3; t = t + h) {
+  for (double t = 0; t <= 5.0; t = t + h) {
     data << t << "," << y << std::endl;
     y = next_step(y, h, t);
   }

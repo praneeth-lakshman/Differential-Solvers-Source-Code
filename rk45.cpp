@@ -50,7 +50,7 @@ const double b26 = 0.0;
 const double eps = 0.00005;
 
 // f = log(abs(y)) - cos(t)
-double f(double y, double t) { return std::log(std::abs(y)) - std::cos(t); }
+double f(double y, double t) { return std::pow(y-1, 2) * std::pow(t-1, 2); }
 
 Values next_step(double y, double h, double t) {
   double k1 = h * f(y, t + h * c1);
@@ -83,11 +83,11 @@ int main() {
   std::ofstream data("example2.txt");
   std::cout << "Starting adaptive RKF45..." << std::endl;
 
-  double y = 1;
+  double y = 0;
   double h = 0.1;
   double t = 0.0;
 
-  while (t <= 3.0) {
+  while (t <= 5.0) {
     Values vals = next_step(y, h, t);
 
     if (vals.h < 1e-6) {
