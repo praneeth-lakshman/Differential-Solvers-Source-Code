@@ -57,7 +57,7 @@ class RKF {
   const double c2 = 1.0 / 4;
   const double c3 = 3.0 / 8;
   const double c4 = 12.0 / 13;
-  const double c5 = 5.0;
+  const double c5 = 1.0;
   const double c6 = 1.0 / 2;
 
   const double b11 = 16.0 / 135;
@@ -133,7 +133,7 @@ class DormandPrince {
   const double c6 = 1.0;
   const double c7 = 1.0;
 
-  const double b11 = 35.0 / 184;
+  const double b11 = 35.0 / 384;
   const double b12 = 0;
   const double b13 = 500.0 / 1113;
   const double b14 = 125.0 / 192;
@@ -185,9 +185,38 @@ class DormandPrince {
   }
 };
 
-double dydt(double y, double t) {
-  return std::pow(y - 1, 2) * std::pow(t - 1, 2);
+double finite_difference(double y, py::function f, double t, double h = 0.001) {
+  return (f(y + h, t).cast<double>() - f(y, t).cast<double>()) / h;
 }
+
+double find_zero(py::function f, double t, double y, double e = 1e-6) {
+  double y_next;
+  bool flag = true;
+  int max_iter = 100;
+  int iter = 0;
+  while (flag && iter++ < max_iter) {
+    y_next = y - f(y, t).cast<double>() / finite_difference(y, f, t);
+    if ((std::abs(y_next - y)) < e) {
+      flag = false;
+      break;
+    }
+    y = y_next;
+  }
+  return y;
+}
+
+class BackwardsEuler {
+ public:
+  BackwardsEuler() = default;
+  double next_step(double y, double h, py::function f, double t) {
+    auto wrapper_func = [f, y, h, t](double y_next, double t_next) -> double {
+      return y_next - y - h * f(y_next, t_next).cast<double>();
+    };
+    py::function py_wrapper = py::cpp_function(wrapper_func);
+
+    return find_zero(py_wrapper, t + h, y);
+  }
+};
 
 PYBIND11_MODULE(ODESolvers, handle) {
   handle.doc() = "My First Library!";
@@ -211,4 +240,12 @@ PYBIND11_MODULE(ODESolvers, handle) {
   py::class_<DormandPrince>(handle, "DormandPrince")
       .def(py::init<double>(), py::arg("epsilon") = 0.005)
       .def("next_step", &DormandPrince::next_step);
+  py::class_<BackwardsEuler>(handle, "BackwardsEuler")
+      .def(py::init<>())
+      .def("next_step", &BackwardsEuler::next_step);
+  handle.def("find_zero", &find_zero, "Newton's method for finding zeros",
+             py::arg("f"), py::arg("t"), py::arg("y"), py::arg("e") = 1e-6);
+  handle.def("finite_difference", &finite_difference,
+             "Finite difference approximation", py::arg("y"), py::arg("f"),
+             py::arg("t"), py::arg("h") = 0.001);
 }
