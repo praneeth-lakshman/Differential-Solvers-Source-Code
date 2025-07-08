@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DODESolvers_EXPORTS
 
-CXX_INCLUDES = -isystem /usr/include/python3.10 -isystem /home/praneeth/summer25/data_visualiser/pybind11/include
+CXX_INCLUDES = -isystem /home/praneeth/summer25/test_ode/pybind11/include -isystem /usr/include/python3.10
 
 CXX_FLAGS = -fPIC -fvisibility=hidden -flto -fno-fat-lto-objects -std=gnu++17
 

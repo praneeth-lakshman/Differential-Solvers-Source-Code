@@ -1,4 +1,4 @@
-# Install script for directory: /home/praneeth/summer25/data_visualiser/pybind11
+# Install script for directory: /home/praneeth/summer25/test_ode/pybind11
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

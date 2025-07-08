@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/praneeth/summer25/data_visualiser
+CMAKE_SOURCE_DIR = /home/praneeth/summer25/test_ode
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/praneeth/summer25/data_visualiser/build
+CMAKE_BINARY_DIR = /home/praneeth/summer25/test_ode/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -98,14 +98,14 @@ pybind11/clean:
 CMakeFiles/ODESolvers.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ODESolvers.dir/build.make CMakeFiles/ODESolvers.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ODESolvers.dir/build.make CMakeFiles/ODESolvers.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/praneeth/summer25/data_visualiser/build/CMakeFiles --progress-num=1,2 "Built target ODESolvers"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/praneeth/summer25/test_ode/build/CMakeFiles --progress-num=1,2 "Built target ODESolvers"
 .PHONY : CMakeFiles/ODESolvers.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ODESolvers.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/praneeth/summer25/data_visualiser/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/praneeth/summer25/test_ode/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ODESolvers.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/praneeth/summer25/data_visualiser/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/praneeth/summer25/test_ode/build/CMakeFiles 0
 .PHONY : CMakeFiles/ODESolvers.dir/rule
 
 # Convenience name for target.

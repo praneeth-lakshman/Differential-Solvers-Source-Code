@@ -1,0 +1,1 @@
+This folder contains files that helped me develop the C++ functions, and I eventually took all of these and added them all into one file for convenience. Some of the methods are outdated in their naming or parameters, but hopefully this is less intimidating than the main.cpp file!
