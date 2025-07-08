@@ -1,8 +1,11 @@
-import sys, os
-script_dir = os.path.dirname(os.path.abspath('__file__'))
-module_dir = os.path.join(script_dir, "build")
-sys.path.append(module_dir)
-import ODESolvers as ode
+import os
+import importlib.util
+
+so_path = os.path.join(os.path.dirname(__file__), 'build', 'ODESolvers.cpython-310-x86_64-linux-gnu.so')
+spec = importlib.util.spec_from_file_location("ODESolvers", so_path)
+ODESolvers = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(ODESolvers)
+
 import math
 import numpy as np
 
