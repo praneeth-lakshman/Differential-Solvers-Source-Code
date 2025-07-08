@@ -18,7 +18,7 @@ I intend to add the theory behind the equations, either as a video series or a J
 
 ## How to Install (Only for Linux systems)
 
-Ensure that your Python version is 3.10 - if you are on a different version, please [recompile the binary!](#Recompile)
+Ensure that your Python version is 3.10 - if you are on a different version, please [recompile the binary!](#Recompile) Also, ensure that numpy is installed (pip install numpy)
 
 1. Open your terminal in a folder containing your existing code and run this command:
 
