@@ -1,16 +1,19 @@
-import os
+import os, sys
 import importlib.util
 
 so_path = os.path.join(os.path.dirname(__file__), 'build', 'ODESolvers.cpython-310-x86_64-linux-gnu.so')
 spec = importlib.util.spec_from_file_location("ODESolvers", so_path)
 ODESolvers = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ODESolvers)
+sys.modules["ODESolvers"] = ODESolvers
+
+import ODESolvers as ode
 
 import math
 import numpy as np
 
 class Explicit:
-    def Euler(y: float, t_span: (float, float), h: float, dydt):
+    def Euler(y: float, t_span: tuple[float, float], h: float, dydt):
         """Use the (forward) Euler method to approximate a solution to IVP. Returns list of y values
 
         Args:
@@ -25,7 +28,7 @@ class Explicit:
             y_vals.append(y)
             y = ode.Euler().next_step(y, h, dydt, t)
         return y_vals
-    def RK4(y: float, t_span: (float, float), h: float, dydt):
+    def RK4(y: float, t_span: tuple[float, float], h: float, dydt):
         """Use the Runge Kutta 4th order method to approximate a solution to IVP. Returns list of y values
 
         Args:
@@ -40,7 +43,7 @@ class Explicit:
             y_vals.append(y)
             y = ode.RK4().next_step(y, h, dydt, t)
         return y_vals
-    def RKF(y: float, t_span: (float, float), h: float, dydt):
+    def RKF(y: float, t_span: tuple[float, float], h: float, dydt):
         """Use the Runge-Kutta-Fehlberg method to approximate a solution to IVP. Returns tuple of lists: (t_vals, y_vals)
 
         Args:
@@ -64,7 +67,7 @@ class Explicit:
             h = result.h
         return (t_vals, y_vals)
 
-    def DormandPrince(y: float, t_span: (float, float), h: float, dydt):
+    def DormandPrince(y: float, t_span: tuple[float, float], h: float, dydt):
         """Use the Dormand-Prince method to approximate a solution to IVP. Returns tuple of lists: (t_vals, y_vals)
 
         Args:
@@ -89,7 +92,7 @@ class Explicit:
         return (t_vals, y_vals)
 
 class Implicit:
-    def BackwardsEuler(y: float, t_span: (float, float), h: float, dydt):
+    def BackwardsEuler(y: float, t_span: tuple[float, float], h: float, dydt):
         """Use the (backwards) Euler method to approximate a solution to IVP. Returns list of y values
 
         Args:
@@ -141,7 +144,7 @@ class ODEMethods:
             e (float, optional): Sensitivity of root finding algorithm. The lower this value, the more iterations. Defaults to 1e-6.
         """
         return ode.find_zero(f, t, y, e)
-    def backward_difference(f, y, dt=0.001):
+    def backward_difference(f, t, dt=0.001):
         """Backward difference of a function f that depends on t ONLY, to calculate df/dt
 
         Args:
@@ -153,7 +156,7 @@ class ODEMethods:
             float: value of function f at the next time step 
         """
         return (f(t) - f(t-dt))/dt
-    def central_difference(f, y, dt=0.002):
+    def central_difference(f, t, dt=0.002):
         """Central finite difference of a function f that depends on t ONLY, to calculate df/dt
 
         Args:
