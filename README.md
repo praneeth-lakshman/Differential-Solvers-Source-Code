@@ -1,4 +1,4 @@
-# Differential Solvers
+# Differential Solvers Source Code
 
 This is a package to numerically solve 1st Order ODEs with initial values entirely written by me in C++, with a Python wrapper so it can be easily used in your code repos. Everything is implemented in C++17, except for the Forward/Backward/Central finite difference methods, which are in native Python. This provides code that is marginally faster and more accurate than the default SciPy solver, but the difference is neglible at best.
 
